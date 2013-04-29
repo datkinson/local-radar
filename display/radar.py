@@ -30,4 +30,4 @@ def showall():
         print item['x'], 'degrees reads', item['distance'], 'cm'
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')
