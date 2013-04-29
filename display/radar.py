@@ -20,8 +20,9 @@ def teardown_request(exception):
 @app.route('/')
 def showall():
     cur = g.db.execute('select * from sonar')
-    for row in cur.fetchall():
-	    print row['distance']
+#    for row in cur.fetchall():
+#	    print row['distance']
+    print cur.fetchall()
 
 if __name__ == '__main__':
     app.debug = True
