@@ -1,10 +1,9 @@
-from flask import Flask
+from flask import Flask, g
 import sqlite3
-from flask import g
 
 app = Flask(__name__)
 
-DATABASE = '/db/sensors.db'
+DATABASE = 'db/sensors.db'
 
 def connect_db():
     return sqlite3.connect(DATABASE)
@@ -26,8 +25,12 @@ def query_db(query, args=(), one=False):
 
 @app.route('/')
 def showall():
-    for item in query_db('select * from sonar'):
-        print item['x'], 'degrees reads', item['distance'], 'cm'
+    readings = query_db('select * from sonar where Id = 1')
+    if readings is None:
+        print 'no readings'
+    else:
+        print readings['distance']
 
 if __name__ == '__main__':
+    app.debug = True
     app.run(host='0.0.0.0')
